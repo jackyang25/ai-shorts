@@ -4,7 +4,7 @@
     "description": "Your project description",
     "main": "pseudoController.js",
     "scripts": {
-      "start": "node pseudoController.js"
+      "start": "node src/server.js"
     },
     "dependencies": {
       "express": "^4.17.1"
