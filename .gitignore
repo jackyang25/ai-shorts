@@ -54,3 +54,6 @@ node_modules/
 
 # MacOS files
 .DS_Store
+
+# VS Code settings
+settings.json
