@@ -1,0 +1,16 @@
+{
+    "name": "br.io",
+    "version": "1.0.0",
+    "description": "Your project description",
+    "main": "pseudoController.js",
+    "scripts": {
+      "start": "node pseudoController.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
+    },
+    "devDependencies": {},
+    "author": "Your Name",
+    "license": "ISC"
+  }
+  
