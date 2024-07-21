@@ -57,3 +57,13 @@ node_modules/
 
 # VS Code settings
 settings.json
+
+
+# virtual environment directories
+venv/
+env/
+.venv/
+
+# temporary directories
+videos
+images
