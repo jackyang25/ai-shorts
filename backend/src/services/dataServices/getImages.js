@@ -5,7 +5,7 @@ const path = require('path');
 
 // Function to gather all images in the assets/images directory
 const gatherImages = () => {
-    const imagesDir = 'src/assets/images'; // Ensure this path is correct
+    const imagesDir = path.join(__dirname, '../../assets/images');
     try {
         const files = fs.readdirSync(imagesDir);
         return files.map(file => ({

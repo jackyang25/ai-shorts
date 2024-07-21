@@ -1,5 +1,5 @@
 const express = require('express');
-const imageRouter = require('./routes/imageRouter'); // Adjust the path if necessary
+const mediaRouters = require('./routes/mediaRouters'); // Adjust the path if necessary
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,8 +13,8 @@ app.use((req, res, next) => {
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Use the image router for the /api path
-app.use('/api', imageRouter);
+// Mount mediaRouters at /api
+app.use('/api', mediaRouters);
 
 
 // Start the server
