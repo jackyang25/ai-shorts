@@ -1,4 +1,4 @@
-const { gatherImages } = require('../services/dataServices/getImages');
+const { gatherImages } = require('../services/imageServices/getImages');
 const { spawn } = require('child_process');
 const path = require('path');
 
@@ -17,14 +17,13 @@ async function gatherImagesHandler() {
 }
 
 async function createShortHandler() {
-    const outputPath = path.resolve(__dirname, '../assets/videos/short.mp4');
+    const outputPath = 'public/generated/videos/short.mp4';
     try {
         if (!imagesCache || imagesCache.length === 0) {
             throw new Error('Images not gathered yet or cache is empty');
         }
 
         const imagePaths = imagesCache.map(img => img.path); // Assuming imagesCache is an array of objects with a 'path' key
-
 
         return new Promise((resolve, reject) => {
             const scriptPath = path.join(__dirname, '../services/videoServices/createShort.py');
@@ -35,11 +34,18 @@ async function createShortHandler() {
             let scriptErrors = ''; // To capture error messages from stderr
 
             process.stdout.on('data', (data) => {
-                scriptOutput += data.toString();
+                const output = data.toString();
+                console.log(output); // Print real-time output from the Python script
+                if (output.includes('JSON_OUTPUT_START')) {
+                    // Start capturing JSON output after the delimiter
+                    scriptOutput = output.split('JSON_OUTPUT_START')[1].trim();
+                }
             });
 
             process.stderr.on('data', (data) => {
-                scriptErrors += data.toString(); // Capture stderr separately to avoid parsing it as JSON
+                const errorOutput = data.toString();
+                console.log(errorOutput); // Print real-time error output from the Python script
+                scriptErrors += errorOutput;
             });
 
             process.on('close', (code) => {
@@ -49,15 +55,14 @@ async function createShortHandler() {
                 } else {
                     try {
                         const result = JSON.parse(scriptOutput);
+
                         if (result.error) {
                             reject(result.error);
                         } else {
+                            console.log(result)
                             resolve(result.video_path);
                             console.log(scriptOutput);
-
-                            
                         }
-
 
                     } catch (err) {
                         reject(`Error parsing JSON output from Python script: ${err.message}`);
