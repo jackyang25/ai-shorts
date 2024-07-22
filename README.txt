@@ -11,3 +11,7 @@ Run setup script
 ./setup.sh
 
 Run npm install
+
+
+To-Do
+- Configure linting

@@ -17,9 +17,8 @@ router.get('/images', async (req, res) => {
 // POST route to create short from images
 router.post('/create-short', async (req, res) => {
     try {
-        const videoPath = await createShortHandler();
-        console.log('Video created at:', videoPath); // Log the video path
-        res.json({ videoPath });
+        result = await createShortHandler();
+        res.json({result});
     } catch (error) {
         console.error('Error creating video:', error);
         res.status(500).json({ error: error.message });

@@ -30,16 +30,11 @@ async function createShortHandler() {
             const data = JSON.stringify({ image_paths: imagePaths, output_path: outputPath });
             const process = spawn('python3', [scriptPath, data]);
 
-            let scriptOutput = ''; // To capture JSON output from stdout
             let scriptErrors = ''; // To capture error messages from stderr
 
             process.stdout.on('data', (data) => {
                 const output = data.toString();
                 console.log(output); // Print real-time output from the Python script
-                if (output.includes('JSON_OUTPUT_START')) {
-                    // Start capturing JSON output after the delimiter
-                    scriptOutput = output.split('JSON_OUTPUT_START')[1].trim();
-                }
             });
 
             process.stderr.on('data', (data) => {
@@ -53,20 +48,7 @@ async function createShortHandler() {
                     console.error('Python script stderr:', scriptErrors); // Log stderr content
                     reject(`Python script exited with code ${code}: ${scriptErrors}`);
                 } else {
-                    try {
-                        const result = JSON.parse(scriptOutput);
-
-                        if (result.error) {
-                            reject(result.error);
-                        } else {
-                            console.log(result)
-                            resolve(result.video_path);
-                            console.log(scriptOutput);
-                        }
-
-                    } catch (err) {
-                        reject(`Error parsing JSON output from Python script: ${err.message}`);
-                    }
+                    resolve(outputPath)
                 }
             });
         });

@@ -46,10 +46,8 @@ def create_short(image_paths, output_path, fps=24):
         final_clip.write_videofile(output_path, fps=fps)
 
         # Indicate the start of the JSON output with a delimiter
-        print("JSON_OUTPUT_START")
         return {"video_path": output_path}
     except Exception as e:
-        print("JSON_OUTPUT_START")
         return {"error": str(e)}
 
 
@@ -61,7 +59,5 @@ if __name__ == "__main__":
         result = create_short(image_paths, output_path)
 
     except Exception as e:
-        print("JSON_OUTPUT_START")
-
         print(json.dumps({"error": str(e)}), file=sys.stderr)
         sys.exit(1)
