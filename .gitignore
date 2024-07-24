@@ -63,7 +63,3 @@ settings.json
 venv/
 env/
 .venv/
-
-# temporary directories
-videos
-images
