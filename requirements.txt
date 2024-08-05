@@ -1,2 +1,5 @@
 moviepy
 imageio[ffmpeg]
+openai
+python-dotenv
+import requests
