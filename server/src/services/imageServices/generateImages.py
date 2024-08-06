@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import requests
 
-success = load_dotenv('/Users/gazirahman/projects/br.io/server/src/services/imageServices/keys.env')
+success = load_dotenv('keys.env')
 client = OpenAI(api_key = os.getenv('OPENAI_API_KEY'))
 
 def generateStoryViaOpenAI(prompt: str, model: str = 'gpt-3.5-turbo'):
