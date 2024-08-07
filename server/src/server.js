@@ -2,7 +2,7 @@ const express = require('express');
 const mediaRouters = require('./routes/mediaRouters'); // Adjust the path if necessary
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Middleware to log all requests
 app.use((req, res, next) => {

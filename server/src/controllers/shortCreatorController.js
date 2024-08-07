@@ -17,7 +17,7 @@ async function gatherImagesHandler() {
 }
 
 async function createShortHandler() {
-    const outputPath = 'public/generated/videos/short.mp4';
+    const outputPath = 'uploads/generated/videos/short.mp4';
     try {
         if (!imagesCache || imagesCache.length === 0) {
             throw new Error('Images not gathered yet or cache is empty');

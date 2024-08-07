@@ -1,18 +1,14 @@
 {
-  "name": "br.io",
-  "version": "1.0.0",
-  "description": "Your project description",
-  "main": "backend/src/server.js",
-  "scripts": {
-    "start": "node server/src/server.js", 
-    "dev": "nodemon server/src/server.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.0"
-  },
-  "author": "Your Name",
-  "license": "ISC"
-}
+    "name": "br.io",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "start": "concurrently \"npm run dev --prefix server\" \"npm run start --prefix client\"",
+      "start:server": "npm run start --prefix server",
+      "start:client": "npm run start --prefix client"
+    },
+    "devDependencies": {
+      "concurrently": "^6.0.0"
+    }
+  }
+  
